@@ -1,36 +1,43 @@
-#include<iostream>
 #include<stdio.h>
 int main()
 {
 	int n; int q=0,c=0,Ct=0;
-   // float avg_wt,avg_tat;
     printf("Enter number of process:");
     scanf("%d",&n);
-    int bt[n],at[n],p[n],wt[n],tat[n],ct[n],i,j,total=0,pos,temp;
+    int bt[n],at[n],p[n],wt[n],tat[n],ct[n],rt[n],i,j,total=0,pos,temp;
+     int a=0,b=0,b1;
  
-    printf("\nEnter Burst Time:\n");
+    printf("\nEnter Burst Time and arrival time respectively\n");
     for(i=0;i<n;i++)
     {
         printf("p%d:",i+1);
-        scanf("%d",&bt[i]);
-        scanf("%d",&at[i]);
+        scanf("%d %d",&bt[i],&at[i]);
+       // scanf("%d",&at[i]);
         p[i]=i+1;           //contains process number
     }
-	/*int q=0;
-	
-	printf("enter the number of processes");
-	int n;
-	int i;
-	scanf("%d",n);
-	int at[n], bt[n], p[n],ct[n];int c=0;
-	int Ct=0;
-	printf("Enter burst time and arrival time respectively");
-	for(int m=0;m<n;m++)
-	{
-	scanf("%d",bt[m]);
-	scanf("%d",at[m]);
-	p[m]=m+1;
-    } */
+	for (i=0; i<n; ++i) 
+        {
+            for(j = i + 1; j < n; ++j)
+            {
+ 
+                if(at[i] > at[j]) 
+                {
+ 
+                    a =  at[i];
+                    at[i] = at[j];
+                    at[j] = a;
+                    
+                    b = bt[i];
+                    bt[i]=bt[j];
+                    bt[j]=b;
+                    
+                    b1= p[i];
+                    p[i]=p[j];
+                    p[j]=b1;
+ 
+                }
+            }
+        }
     for(i=0;i<n;i++)
 	{
 		if(at[0]!=0&&c==0)
@@ -67,20 +74,21 @@ int main()
 	
 			for(int o=q;o<n;o++)
 			{
-			if (bt[o]>bt[o+1])
+				for(int o1 = o + 1; o1 < n; ++o1)
+			if (bt[o]>bt[o1])
 			 {
 				int t;
 				t=bt[o];
-				bt[o]=bt[o+1];
-				bt[o+1]=t;
+				bt[o]=bt[o1];
+				bt[o1]=t;
 				int t2;
 				t2=at[o];
-				at[o]=at[o+1];
-				at[o+1]=t2;
+				at[o]=at[o1];
+				at[o1]=t2;
 				int t3;
 				t3=p[o];
-				p[o]=p[o+1];
-				p[o+1]=t3;
+				p[o]=p[o1];
+				p[o1]=t3;
 			 }
 		    }
 		    for(int j=i;j<n;j++){
@@ -88,10 +96,14 @@ int main()
 		    Ct=Ct+bt[j];
 			ct[j]=Ct;}
 }
-	 printf("\nProcessNo\tArrival Time\tBurst Time\tC.T\tT.A.T\tW.T");
+     //for(i=0;i<n;i++)
+     //{
+     //	tat[i]=ct[i]-at[i];
+	 //}
+	 printf("\nProcessNo\tA.T\tB.Time\tC.T\tT.A.T\tW.T");
 	 for(int l=0;l<n;l++)
 	 {
-	 	printf("\n%d\t\t%d\t\t%d\t%d",p[l],at[l],bt[l],ct[l]);
+	 	printf("\n%d\t\t%d\t%d\t%d\t%d\t%d",p[l],at[l],bt[l],ct[l],tat[i],wt[i]);
 	 }
 	 
     
