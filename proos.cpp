@@ -4,8 +4,8 @@ int main()
 	int n; int q=0,c=0,Ct=0;
     printf("Enter number of process:");
     scanf("%d",&n);
-    int bt[n],at[n],p[n],wt[n],tat[n],ct[n],rt[n],i,j,total=0,pos,temp,as1;
-     int a=0,b=0,b1;
+    int bt[n],at[n],p[n],wt[n],tat[n],ct[n],rt[n],i,j,total=0,pos,temp,as1,avg_tat=0,avg_wt=0;
+    int a=0,b=0,b1;
  
     printf("\nEnter Burst Time and arrival time respectively\n");
     for(i=0;i<n;i++)
@@ -15,7 +15,6 @@ int main()
         scanf("%d",&at[i]);
 		printf("Enter burst time:");
 		scanf("%d",&bt[i]);
-       // scanf("%d",&at[i]);
         p[i]=i+1;           //contains process number
     }
 	for (i=0; i<n; ++i) 
@@ -111,13 +110,17 @@ int main()
      for(i=0;i<n;i++)
      {
      	tat[i]=ct[i]-at[i];
+     	avg_tat=avg_tat+tat[i];
      	wt[i]=tat[i]-bt[i];
+     	avg_wt=avg_wt+wt[i];
 	 }
 	 printf("\nProcessNo\tA.T\tB.Time\tC.T\tT.A.T\tW.T");
 	 for(int l=0;l<n;l++)
 	 {
 	 	printf("\n%d\t\t%d\t%d\t%d\t%d\t%d",p[l],at[l],bt[l],ct[l],tat[l],wt[l]);
 	 }
+	 printf("\nAverage turn around time:%d",avg_tat/n);
+	 printf("\nAverage wating time:%d",avg_wt/n);
 	 
     
 }
